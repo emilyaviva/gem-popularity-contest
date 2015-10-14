@@ -19,7 +19,6 @@ var tracker = {
   voteFor: function(name) {
     for (var i in this.allGems) {
       if (this.allGems[i].name === name) {
-        this.allGems[i].votes += 1;
         chartData.datasets[0].data[i] = this.allGems[i].votes;
       }
     }
@@ -29,7 +28,6 @@ var tracker = {
 function Gem(name, photo) {
   this.name = name;
   this.photo = photo;
-  this.votes = 0;
   chartData.labels.push(name);
   chartData.datasets[0].data.push(0);
   tracker.allGems.push(this);
