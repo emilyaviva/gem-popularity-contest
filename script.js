@@ -19,33 +19,41 @@ var tracker = {
   voteFor: function(name) {
     for (var i in this.allGems) {
       if (this.allGems[i].name === name) {
+        this.allGems[i].votes += 1;
         chartData.datasets[0].data[i] = this.allGems[i].votes;
+        chart.datasets[0].bars[i].value = this.allGems[i].votes;
+        break;
       }
     }
+    localStorage.chartData = JSON.stringify(chartData);
   }
 };
 
 function Gem(name, photo) {
   this.name = name;
   this.photo = photo;
+  this.votes = 0;
   chartData.labels.push(name);
   chartData.datasets[0].data.push(0);
   tracker.allGems.push(this);
 }
 
-var chartData = {
-  labels: [],
-  datasets: [
-    {
-      label: 'Gem Popularity',
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,0.8)",
-      highlightFill: "rgba(151,187,205,0.75)",
-      highlightStroke: "rgba(151,187,205,1)",
-      data: []
-    }
-  ]
-};
+var chartData = localStorage.chartData ? JSON.parse(localStorage.chartData) :
+(
+  {
+    labels: [],
+    datasets: [
+      {
+        label: 'Gem Popularity',
+        fillColor: "rgba(151,187,205,0.5)",
+        strokeColor: "rgba(151,187,205,0.8)",
+        highlightFill: "rgba(151,187,205,0.75)",
+        highlightStroke: "rgba(151,187,205,1)",
+        data: []
+      }
+    ]
+  }
+);
 
 new Gem('Steven', 'img/steven.png');
 new Gem('Rose Quartz', 'img/rosequartz.png');
@@ -69,15 +77,20 @@ var photo2 = document.getElementById('gem2photo');
 
 gem1.addEventListener('click', function() {
   tracker.voteFor(header1.innerHTML);
-  new Chart(ctx).Bar(chartData);
+  chart.update();
   tracker.displayImages();
 });
 gem2.addEventListener('click', function() {
   tracker.voteFor(header2.innerHTML);
-  new Chart(ctx).Bar(chartData);
+  chart.update();
   tracker.displayImages();
 });
 
 var ctx = document.getElementById('results').getContext('2d');
+var chart = new Chart(ctx).Bar(chartData, {
+  scaleShowVerticalLines: false,
+  scaleShowHorizontalLines: true,
+  barStrokeWidth: 1
+});
 
 tracker.displayImages();
