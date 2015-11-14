@@ -1,3 +1,4 @@
+var chartData;
 var tracker = {
   allGems: [],
   randomGem: function() {
@@ -25,7 +26,7 @@ var tracker = {
         break;
       }
     }
-    localStorage.chartData = JSON.stringify(chartData);
+    localStorage.setItem('chartData', JSON.stringify(chartData));
   }
 };
 
@@ -33,14 +34,23 @@ function Gem(name, photo) {
   this.name = name;
   this.photo = photo;
   this.votes = 0;
-  chartData.labels.push(name);
-  chartData.datasets[0].data.push(0);
   tracker.allGems.push(this);
 }
 
-var chartData = localStorage.chartData ? JSON.parse(localStorage.chartData) :
-(
-  {
+if (localStorage.chartData) {
+  chartData = JSON.parse(localStorage.getItem('chartData'));
+} else {
+  new Gem('Steven', 'img/steven.png');
+  new Gem('Rose Quartz', 'img/rosequartz.png');
+  new Gem('Garnet', 'img/garnet.png');
+  new Gem('Amethyst', 'img/amethyst.png');
+  new Gem('Peridot', 'img/peridot.png');
+  new Gem('Lapis Lazuli', 'img/lapislazuli.png');
+  new Gem('Stevonnie', 'img/stevonnie.png');
+  new Gem('Pearl', 'img/pearl.png');
+  new Gem('Ruby', 'img/ruby.png');
+  new Gem('Sapphire', 'img/sapphire.png');
+  chartData = {
     labels: [],
     datasets: [
       {
@@ -52,19 +62,14 @@ var chartData = localStorage.chartData ? JSON.parse(localStorage.chartData) :
         data: []
       }
     ]
-  }
-);
+  };
+}
 
-new Gem('Steven', 'img/steven.png');
-new Gem('Rose Quartz', 'img/rosequartz.png');
-new Gem('Garnet', 'img/garnet.png');
-new Gem('Amethyst', 'img/amethyst.png');
-new Gem('Peridot', 'img/peridot.png');
-new Gem('Lapis Lazuli', 'img/lapislazuli.png');
-new Gem('Stevonnie', 'img/stevonnie.png');
-new Gem('Pearl', 'img/pearl.png');
-new Gem('Ruby', 'img/ruby.png');
-new Gem('Sapphire', 'img/sapphire.png');
+for (var i = 0; i < tracker.allGems.length; i++) {
+  var gem = tracker.allGems[i];
+  chartData.labels.push(gem.name);
+  chartData.datasets[0].data.push(0);
+}
 
 var gem1 = document.getElementById('gem1');
 var gem2 = document.getElementById('gem2');
