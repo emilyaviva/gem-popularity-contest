@@ -1,3 +1,5 @@
+'use strict';
+
 var chartData;
 var tracker = {
   allGems: [],
@@ -91,7 +93,10 @@ gem2.addEventListener('click', function() {
   tracker.displayImages();
 });
 
-var ctx = document.getElementById('results').getContext('2d');
+var canvas = document.getElementsByTagName('canvas')[0];
+var ctx = canvas.getContext('2d');
+canvas.setAttribute('width', 400);
+canvas.setAttribute('height', 400);
 var chart = new Chart(ctx).Bar(chartData, {
   scaleShowVerticalLines: false,
   scaleShowHorizontalLines: true,
