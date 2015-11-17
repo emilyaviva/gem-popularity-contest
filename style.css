@@ -7,28 +7,36 @@ h1 {
   margin-top: 1em;
 }
 
-.images {
-  width: 500px;
+.app {
+  width: 860px;
+  height: 280px;
   margin: 0 auto;
+}
+
+.item {
+  margin: 0 auto;
+  display: inline-block;
+  background-color: #ecf7fa;
+  border: 3px solid #2a1e03;
+  border-radius: 4%;
+}
+
+.gem {
+  width: 250px;
+  height: 280px;
+}
+
+.chart {
+  width: 320px;
+  height: 280px;
+}
+
+#results {
+  width: 250px;
+  height: 250px;
 }
 
 img {
   max-height: 200px;
   max-width: 250px;
-}
-
-.left {
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-
-.right {
-  float: right;
-  margin: 0;
-  padding: 0;
-}
-
-.chart {
-  clear: both;
 }
