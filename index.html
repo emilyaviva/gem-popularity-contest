@@ -10,18 +10,18 @@
   <header>
     <h1>Who is the most popular Gem?</h1>
   </header>
-  <section id="images" class="images">
-    <figure id="gem1" class="left">
+  <section id="app" class="app">
+    <figure id="gem1" class="gem item">
       <h3 id="gem1header"></h3>
       <img id="gem1photo">
     </figure>
-    <figure id="gem2" class="right">
+    <aside id="chart" class="chart item">
+      <canvas id="results"></canvas>
+    </aside>
+    <figure id="gem2" class="gem item">
       <h3 id="gem2header"></h3>
       <img id="gem2photo">
     </figure>
-  </section>
-  <section id="chart" class="chart">
-    <canvas id="results" width="400" height="400"></canvas>
   </section>
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
